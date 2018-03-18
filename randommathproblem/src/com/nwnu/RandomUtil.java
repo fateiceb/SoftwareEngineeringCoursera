@@ -1,4 +1,4 @@
-package com.company;
+package com.nwnu;
 
 import java.util.Random;
 
@@ -14,10 +14,5 @@ public class RandomUtil {
         return random.nextInt(right);
     }
 
-    public static void main(String[] args){
-        for (int i = 0 ;i< 100;i++){
-            System.out.println(randomIntScope(3,5));
-        }
-    }
 
 }

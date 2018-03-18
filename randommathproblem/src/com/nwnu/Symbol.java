@@ -1,6 +1,4 @@
-package com.company;
-
-import java.util.Stack;
+package com.nwnu;
 
 public class Symbol {
     private String value;

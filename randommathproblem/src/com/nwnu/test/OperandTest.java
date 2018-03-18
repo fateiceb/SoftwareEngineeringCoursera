@@ -1,6 +1,6 @@
-package com.company.test;
+package com.nwnu.test;
 
-import com.company.Operand;
+import com.nwnu.Operand;
 
 public class OperandTest {
     public static void main(String[] args){

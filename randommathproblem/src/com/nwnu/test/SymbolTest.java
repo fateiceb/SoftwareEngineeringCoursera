@@ -1,6 +1,6 @@
-package com.company.test;
+package com.nwnu.test;
 
-import com.company.Symbol;
+import com.nwnu.Symbol;
 
 public class SymbolTest {
     public static void main(String[] args){

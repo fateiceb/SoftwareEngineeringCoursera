@@ -1,4 +1,4 @@
-package com.company;
+package com.nwnu;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -14,13 +14,13 @@ public class CalResult {
         return suffix;
     }
 
+    //中缀转后缀表达式
     public int Suffix(Expression expression){
         expressionList = expression.getexpressionList();
         operStack  = new Stack<>();
         suffix = new ArrayList<>();
 
         for (String str:expressionList){
-            System.out.print(str);
            if(Operand.isNumeric(str)){
                suffix.add(str);
            }else{
@@ -59,12 +59,11 @@ public class CalResult {
         while (!operStack.isEmpty()){
             suffix.add(operStack.pop());
         }
-        System.out.println(suffix);
-        System.out.println();
         return 1;
     }
-
-    public void calResult(ArrayList<String> suffix){
+    //计算逆波兰式
+    public Boolean calResult(Expression expression){
+        Suffix(expression);
         Stack<String> calStack = new Stack<>();
         for (int i = 0;i<suffix.size();i++){
             if (Operand.isNumeric(suffix.get(i))){
@@ -72,11 +71,18 @@ public class CalResult {
             }else{
                 String numa = calStack.pop();
                 String numb = calStack.pop();
-                calStack.push(String.valueOf(Symbol.calValue(numb,numa,suffix.get(i))));
+                try {
+                if (suffix.get(i).equals("/")&&Operand.isDecimals(numa,numb)){
+                    return false;
+                }
+                    calStack.push(String.valueOf(Symbol.calValue(numb,numa,suffix.get(i))));
+                }catch (Exception e) {
+                    return false;
+                }
             }
         }
-        System.out.println(calStack.peek());
-
+        expression.setResult(calStack.peek());
+        return true;
     }
 
 

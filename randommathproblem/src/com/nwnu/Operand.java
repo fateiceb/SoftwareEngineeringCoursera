@@ -1,4 +1,4 @@
-package com.company;
+package com.nwnu;
 
 
 public class Operand {
@@ -7,7 +7,7 @@ public class Operand {
     private int minValue;
 
     public Operand(){
-        this.value = RandomUtil.randomInt(100)+1;
+        this.value = RandomUtil.randomInt(50)+1;
     }
 
     public Operand(int minValue,int maxValue){
@@ -37,6 +37,9 @@ public class Operand {
     public static  Boolean isDecimals(String numa,String numb){
         int anum = Integer.parseInt(numa);
         int bnum = Integer.parseInt(numb);
+        if (anum == 0||bnum==0){
+            return false;
+        }
         if(anum%bnum == 0){
             return false;
         }
