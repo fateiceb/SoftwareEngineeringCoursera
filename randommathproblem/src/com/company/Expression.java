@@ -1,6 +1,5 @@
 package com.company;
 
-import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.util.ArrayList;
@@ -11,9 +10,11 @@ public class Expression {
     private int symbolLength;
     private int operandLength;
     private int result;
+    StringBuilder expressStr ;
+    private  ScriptEngineManager scriptEngineManager;
     private ArrayList<Symbol> symbolList;
     private ArrayList<Operand> operandList;
-    private ArrayList<Character> expressionList;
+    private ArrayList<String> expressionList;
 
     public Expression(){
         this.minSymbol = 3;
@@ -25,6 +26,10 @@ public class Expression {
         this.minSymbol = minSymbol;
         this.maxSymbol = maxSymbol;
         generateexpression();
+        expressStr = new StringBuilder();
+        for (String c : expressionList){
+            expressStr.append(String.valueOf(c));
+        }
     }
 
 
@@ -34,16 +39,17 @@ public class Expression {
         }
         generateSymbolList();
         generateOprandList();
-        char operand;
-        char symbol;
+        String operand;
+        String symbol;
         for (int i = 0;i<symbolLength;i++){
-            operand = String.valueOf(operandList.get(i).getValue()).charAt(0);
+            operand = String.valueOf(operandList.get(i).getValue());
             symbol = symbolList.get(i).getValue();
             expressionList.add(operand);
             expressionList.add(symbol);
         }
-        operand = String.valueOf(operandList.get(operandLength-1).getValue()).charAt(0);
+        operand = String.valueOf(operandList.get(operandLength-1).getValue());
         expressionList.add(operand);
+        addBracket(RandomUtil.randomInt(3));
         System.out.println(expressionList);
     }
     
@@ -70,19 +76,113 @@ public class Expression {
         }
         this.operandLength = operandList.size();
     }
+    public void addBracket(int bracketNum){
 
-    public int calResult() throws ScriptException {
-        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
-        ScriptEngine scriptEngine = scriptEngineManager.getEngineByName("js");
-        System.out.println(expressionList);
-        StringBuilder expressStr = new StringBuilder();
-        for (char c : expressionList){
-            expressStr.append(String.valueOf(c));
-        }
-        System.out.println(expressStr);
-        this.result = (int) scriptEngine.eval(expressStr.toString());
-        return result;
+        int braNum = bracketNum;
+          for (int i = 0;i<expressionList.size();i++){
+              if(braNum == 0){
+                  return;
+              }
+              if (Operand.isNumeric(expressionList.get(i))){
+                  expressionList.add(i,"(");
+                  expressionList.add(i+4,")");
+                  braNum--;
+                  i = i+4;
+              }
+
+          }
+
+
     }
+    //规范表达式
+    public void ruleExpression(){
+        //优先处理括号中内容
+        int leftIndex = expressionList.indexOf("(");
+        int rightIndex = expressionList.indexOf(")");
+        while (leftIndex != -1){
+            String numa = expressionList.get(leftIndex+1);
+            String numb = expressionList.get(rightIndex-1);
+            //检测括号中的运算符，替换负数
+            if ("-".equals(expressionList.get(leftIndex + 2))) {
+                if (Operand.isMinus(numa,numb)){
+                    expressionList.set(rightIndex-1,numa);
+                    expressionList.set(leftIndex+1,numb);
+                }
+                expressionList.set(leftIndex+2,"sub");
+                //检测括号中的运算符，替换除法
+            }else if ("/".equals(expressionList.get(leftIndex+2))){
+                if(Operand.isDecimals(numa,numb)){
+                    int a = RandomUtil.randomIntScope(1,20);
+                    int b = a*RandomUtil.randomInt(4);
+                    expressionList.set(rightIndex-1, String.valueOf(a));
+                    expressionList.set(leftIndex+1, String.valueOf(b));
+                }
+                expressionList.set(leftIndex+2,"div");
+            }
+
+            expressionList.set(leftIndex, "a");
+            expressionList.set(rightIndex, "b");
+            leftIndex = expressionList.indexOf("(");
+            rightIndex = expressionList.indexOf(")");
+            //将括号替换
+        }
+
+        //将括号替换回来
+        for(int i = 0;i<expressionList.size();i++){
+            if ("a".equals(expressionList.get(i))){
+                expressionList.set(i,"(");
+            }
+            if ("b".equals(expressionList.get(i))){
+                expressionList.set(i,")");
+            }
+
+        }
+        //处理减法
+        int subIndex = expressionList.indexOf("-");
+        while (subIndex != -1){
+            String numa = expressionList.get(subIndex-1);
+            String numb = expressionList.get(subIndex+1);
+            //检测运算符，替换负数
+            if ("-".equals(expressionList.get(subIndex))) {
+                if (Operand.isMinus(numa,numb)){
+                    expressionList.set(subIndex+1,numa);
+                    expressionList.set(subIndex-1,numb);
+                }
+            }
+            expressionList.set(subIndex, "sub");
+            subIndex = expressionList.indexOf("-");
+        }
+        //减法替换回来
+        for(int i = 0;i<expressionList.size();i++){
+            if ("sub".equals(expressionList.get(i))){
+                expressionList.set(i,"-");
+            }
+
+        }
+        //处理除法
+        int divIndex = expressionList.indexOf("/");
+        while (divIndex != -1){
+            String numa = expressionList.get(divIndex-1);
+            String numb = expressionList.get(divIndex+1);
+            //检测运算符，替换除数
+            if ("/".equals(expressionList.get(divIndex))) {
+                if (Operand.isDecimals(numa,numb)){
+                    expressionList.set(divIndex+1,numa);
+                    expressionList.set(divIndex-1,numb);
+                }
+            }
+            expressionList.set(divIndex, "div");
+            divIndex = expressionList.indexOf("/");
+        }
+
+        for(int i = 0;i<expressionList.size();i++){
+            if ("div".equals(expressionList.get(i))){
+                expressionList.set(i,"/");
+            }
+
+        }
+    }
+
     public int getMinSymbol() {
         return minSymbol;
     }
@@ -123,17 +223,16 @@ public class Expression {
         this.operandList = operandList;
     }
 
-    public ArrayList<Character> getexpressionList() {
+    public ArrayList<String> getexpressionList() {
         return expressionList;
     }
 
-    public void setexpressionList(ArrayList<Character> expressionList) {
+    public void setexpressionList(ArrayList<String> expressionList) {
         this.expressionList = expressionList;
     }
 
     public static void main(String[] args) throws ScriptException {
-            Expression expression = new Expression(6,10);
-           System.out.println(expression.calResult());
+            Expression expression = new Expression(3,5);
 
     }
 }
