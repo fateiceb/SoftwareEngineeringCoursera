@@ -4,8 +4,8 @@ public class ProperFraction extends Operand{
     private int numa;
     private int numb;
     public ProperFraction(){
-        this.numa = RandomUtil.randomIntScope(1,5);
-        this.numb = RandomUtil.randomIntScope(6,10);
+        this.numa = RandomUtil.randomIntScope(1,3);
+        this.numb = RandomUtil.randomIntScope(10,30);
         int gcd = gcd(numa,numb);
          this.numa = numa / gcd;
         this.numb = numb / gcd;
@@ -36,7 +36,7 @@ public class ProperFraction extends Operand{
     public static ProperFraction calProperFraction(ProperFraction a,
                                                    ProperFraction b, Symbol symbol){
         ProperFraction properFraction = null;
-
+        //计算分数加减乘除
         switch (symbol.getValue()){
             case "+":properFraction = fracAdd(a.numa,a.numb,b.numa,b.numb);break;
             case "-":properFraction = fracSub(a.numa,a.numb,b.numa,b.numb);break;
@@ -47,9 +47,7 @@ public class ProperFraction extends Operand{
         return properFraction;
     }
     static ProperFraction fracAdd(int first_numerator,int first_denominator,int second_numrator,int second_denominator){
-        //以下代码能够在控制台上显示结果
-        //需要调用求最大公约数的函数
-        //需要调用求最小公倍数的函数
+
         int denominator;
         int numerator;
 
@@ -73,8 +71,6 @@ public class ProperFraction extends Operand{
 
     }
     static ProperFraction fracSub(int first_numerator,int first_denominator,int second_numrator,int second_denominator){
-        //以下代码能够在控制台上显示结果
-        //需要调用求最大公约数的函数
 
         int denominator;
         int numerator;
@@ -99,8 +95,6 @@ public class ProperFraction extends Operand{
 
     }
     static ProperFraction fracMul(int first_numerator,int first_denominator,int second_numerator,int second_denominator){
-        //以下代码能够在控制台上显示结果
-        //需要调用求最大公约数的函数
 
         int denominator;
         int numerator;
@@ -119,8 +113,7 @@ public class ProperFraction extends Operand{
 
     }
     static ProperFraction fractDiv(int first_numerator,int first_denominator,int second_numerator,int second_denominator){
-        //以下代码能够在控制台上显示结果
-        //需要调用求最大公约数的函数
+
 
         int denominator;
         int numerator;

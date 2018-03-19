@@ -11,8 +11,12 @@ public class Main {
         String n = null;
         if (args != null) {
             n = args[0];
+        }else{
+            System.out.println("请输入参数");
         }
-        int num = 5;
+
+        int num = 0;
+
         if (Operand.isNumeric(args[0])){
             num = Integer.parseInt(n);
             if(num < 0|| num > 1000){
@@ -24,10 +28,12 @@ public class Main {
             return;
         }
 
-
+        //输出重定向到文件
         PrintStream ps=new PrintStream(new FileOutputStream("result.txt"));
         System.setOut(ps);
         System.out.println("201571030138");
+
+        //生成表达式并计算结果
         for(int i = 0;i<num;i++) {
             try {
                 Expression expression = new Expression(3, 4);

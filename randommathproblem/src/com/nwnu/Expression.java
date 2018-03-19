@@ -40,6 +40,7 @@ public class Expression {
         return transferExpress(expressionList)+"="+result;
     }
 
+
     public void generateexpression(){
         if (expressionList == null){
             expressionList = new ArrayList<>();
@@ -58,12 +59,13 @@ public class Expression {
         expressionList.add(operand);
         addBracket(RandomUtil.randomInt(3));
     }
-    
-    
+
+    //生成运算符
     public void generateSymbolList(){
         if(symbolList == null){
             symbolList = new ArrayList<>();
         }
+        //生成运算符数量
         int scope = RandomUtil.randomIntScope(minSymbol,maxSymbol);
         for(int i = 0;i < scope;i++){
             Symbol symbol = new Symbol();
@@ -75,7 +77,7 @@ public class Expression {
         this.symbolLength = symbolList.size(); 
     }
     
-    //生成运算符
+    //生成操作数
     public void generateOprandList(){
         if(operandList == null){
             operandList = new ArrayList<>();

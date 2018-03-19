@@ -72,6 +72,7 @@ public class CalResult {
                 String numa = calStack.pop();
                 String numb = calStack.pop();
                 try {
+                    //如果结果为小数返回false
                 if (suffix.get(i).equals("/")&&Operand.isDecimals(numa,numb)){
                     return false;
                 }
