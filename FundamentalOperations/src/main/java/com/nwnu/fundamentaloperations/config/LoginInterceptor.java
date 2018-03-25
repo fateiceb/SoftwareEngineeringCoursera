@@ -15,7 +15,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         boolean flag;
         UserEntity user = (UserEntity) request.getSession().getAttribute("user");
         if (user == null) {
-            response.sendRedirect("/Login");
+            response.sendRedirect("/index");
             flag = false;
         } else {
             flag = true;

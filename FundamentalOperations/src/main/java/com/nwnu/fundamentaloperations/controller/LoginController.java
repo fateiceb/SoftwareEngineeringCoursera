@@ -18,23 +18,18 @@ public class LoginController {
 
     @RequestMapping(value = "/Login")
     public String login(){
-        return "login";
+        return "/views/login";
     }
 
-    @RequestMapping(value = "/LoginCheck",method = RequestMethod.POST)
-    public String loginCheck(@Param("username") String username, @Param("password") String password,
-                             HttpServletRequest request){
-        UserEntity userEntity = userRepository.findByUsername(username);
-        if (userEntity != null&&userEntity.getPassword().equals(password)){
-            request.getSession().setAttribute("user",userEntity);
-            return "home";
-        }
 
-        return "login";
-    }
-
-    @RequestMapping(value = "/home")
+    @RequestMapping(value = "/index")
     public String home(){
-        return "home";
+        return "/views/index";
     }
+
+    @RequestMapping(value = "/admin/index")
+    public String adminIndex(){
+        return "/views/_exam/index";
+    }
+
 }
