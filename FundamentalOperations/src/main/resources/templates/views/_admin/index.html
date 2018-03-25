@@ -1,4 +1,5 @@
-<#import "/_admin/lib/sidbar_templet.html" as sidbarTemplet>
+<#import "/lib/sidbar_templet.html" as sidbarTemplet>
+
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
@@ -8,8 +9,9 @@
     <title>Exam</title>
 
     <!-- Bootstrap -->
-    <link href="/static/assets/yeti/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="/static/css/style.css" />
+    <link href="/assets/yeti/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/style.css" />
+      <link rel="import" href="/lib/sidbar_templet.html">
 	
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,7 +23,7 @@
   <style>
   .backs{
   
-  background: url(/static/img/backs.jpeg);
+  background: url(/img/backs.jpeg);
   background-size:100%;
   
   }
@@ -38,7 +40,7 @@
   }
   </style>
   <body  class="backs">
-  <img class="bzi"  src="/static/img/biglogo.png">
+  <img class="bzi"  src="/img/biglogo.png">
 <@sidbarTemplet.header />
 	
 	<div class="container-fluid ">
@@ -56,9 +58,9 @@
 	</div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script type="text/javascript" src="/static/js/jquery-1.10.2.min.js" ></script>
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js" ></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <script>
     	$(function() {
     		

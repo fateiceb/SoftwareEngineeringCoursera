@@ -28,8 +28,13 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/admin/index")
-    public String adminIndex(){
+    public String examIndex(){
         return "/views/_exam/index";
+    }
+
+    @RequestMapping(value = "/admin/Userpage")
+    public String adminIndex(){
+        return "/views/_admin/index";
     }
 
 }
