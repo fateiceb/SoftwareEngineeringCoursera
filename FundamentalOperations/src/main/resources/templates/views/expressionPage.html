@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title th:text="${new java.util.Date().getTime()}">答题窗口</title>
+    <title >答题区</title>
     <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
 </head>
+
 <body>
 <div class="panel panel-default">
+
     <div th:each="ex,it:${expressions}" class="panel-body">
         <label th:text="这是第+${it.index+1}+题" for="basic-url"></label>
         <div class="input-group">
@@ -41,6 +44,38 @@
 </body>
 <script src="/bootstrap-3.3.7-dist/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/layer/layer.js"></script>
+<script>
+    window.onload =resetTime(600);
+    function resetTime(time){
+        var timer=null;
+        var t=time;
+        var m=0;
+        var s=0;
+        m=Math.floor(t/60%60);
+        m<10&&(m='0'+m);
+        s=Math.floor(t%60);
+        function countDown(){
+            s--;
+            s<10&&(s='0'+s);
+            if(s.length>=3){
+                s=59;
+                m="0"+(Number(m)-1);
+            }
+            if(m.length>=3){
+                m='00';
+                s='00';
+                clearInterval(timer);
+            }
+            console.log(m+"分钟"+s+"秒");
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.title("答题区  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                "倒计时："+m+"分钟"+s+"秒", index)  //再改变当前层的标题
+            if(m==0&&s==0) submitResult();
+        }
+        timer=setInterval(countDown,1000);
+    }
+
+</script>
 <script>
     var submitFlag = 0;
     var next = 0;
@@ -100,4 +135,5 @@
         parent.layer.close(index);
     }
 </script>
+
 </html>
