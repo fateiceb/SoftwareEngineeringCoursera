@@ -100,8 +100,8 @@
 						<span class="box-date">试题分数: 20 * 5（分） = 20 （分）</span>
 						<h4 class="time">时间 : <span class="badge" style="background: grey; font-size: 15px">60</span> 分钟</h4>
 						<div class="clearfix"></div>
-						<button class="btn btn-info center-block" onclick="select(${item.testpaperId})">选择题目考试</button>
-						<div class="clearfix" id="btn"></div>
+						<button class="btn btn-info center-block" id="btn1">选择题目考试</button>
+						<div class="clearfix" ></div>
 					</div>
 				</div>
 				<div class="col-xs-4">
@@ -110,8 +110,8 @@
 						<span class="box-date">试题分数: 20 * 5（分） = 20 （分）</span>
 						<h4 class="time">时间 : <span class="badge" style="background: grey; font-size: 15px">60</span> 分钟</h4>
 						<div class="clearfix"></div>
-						<button class="btn btn-info center-block" onclick="select(${item.testpaperId})">选择题目考试</button>
-						<div class="clearfix" id="btn"></div>
+						<button class="btn btn-info center-block " id="btn2">选择题目考试</button>
+						<div class="clearfix" ></div>
 					</div>
 				</div>
 				<div class="col-xs-4">
@@ -120,8 +120,8 @@
 						<span class="box-date">试题分数: 20 * 5（分） = 20 （分）</span>
 						<h4 class="time">时间 : <span class="badge" style="background: grey; font-size: 15px">60</span> 分钟</h4>
 						<div class="clearfix"></div>
-						<button class="btn btn-info center-block" onclick="select(${item.testpaperId})">选择题目考试</button>
-						<div class="clearfix" id="btn"></div>
+						<button class="btn btn-info center-block" id="btn3">选择题目考试</button>
+						<div class="clearfix"></div>
 					</div>
 				</div>
 
@@ -143,32 +143,40 @@
 <script type="text/javascript" src="/js/icheck.min.js" ></script>
 <script type="text/javascript" src="/assets/toastr-master/toastr.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
+	<script type="text/javascript" src="/layer/layer.js"></script>
+
 
 <script>
-$(document).ready(function(){
-  $('input').iCheck({
-    checkboxClass: 'icheckbox_square',
-    radioClass: 'iradio_square',
-    increaseArea: '20%' // optional
-  });
-});
-
-function select(id) {
-	window.location="/exam/exam-"+id+".html";
-};
-
-/* function select(id) {
-	ajaxSubmit("/exam/autoGenerate", 'testpaperId='+id,
-		function(data) {
-			if(data) {
-				window.location="/exam/exam.html";
-			}
-		},
-		function(data) {
-			alert(data);
-		}
-	);
-}; */
+$("#btn1").click(function () {
+    layer.open({
+        type: 2,
+        title: '答题页面',
+        shadeClose: true,
+        shade: 0.8,
+        area: ['50%', '60%'],
+        content: '/expression/1' //iframe的url
+    });
+})
+$("#btn2").click(function () {
+    layer.open({
+        type: 2,
+        title: '答题页面',
+        shadeClose: true,
+        shade: 0.8,
+        area: ['50%', '60%'],
+        content: '/expression/2' //iframe的url
+    });
+})
+$("#btn3").click(function () {
+    layer.open({
+        type: 2,
+        title: '答题页面',
+        shadeClose: true,
+        shade: 0.8,
+        area: ['50%', '60%'],
+        content: '/expression/3' //iframe的url
+    });
+})
 </script>
 	</body>
 </html>
