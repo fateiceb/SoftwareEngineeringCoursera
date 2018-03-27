@@ -100,8 +100,8 @@
 				<div class="col-xs-4">
 					<div class="box">
 						<p class="box-title">百以内整数算式练习</p>
-						<span class="box-date">试题分数: 20 * 5（分） = 20 （分）</span>
-						<h4 class="time">时间 : <span class="badge" style="background: grey; font-size: 15px">60</span> 分钟</h4>
+						<span class="box-date">试题分数: 20 * 5（分） = 100 （分）</span>
+						<h4 class="time">时间 : <span class="badge" style="background: grey; font-size: 15px">15</span> 分钟</h4>
 						<div class="clearfix"></div>
 						<button class="btn btn-info center-block" id="btn1">选择题目考试</button>
 						<div class="clearfix" ></div>
@@ -110,8 +110,8 @@
 				<div class="col-xs-4">
 					<div class="box">
 						<p class="box-title">带括号算式练习</p>
-						<span class="box-date">试题分数: 20 * 5（分） = 20 （分）</span>
-						<h4 class="time">时间 : <span class="badge" style="background: grey; font-size: 15px">60</span> 分钟</h4>
+						<span class="box-date">试题分数: 20 * 5（分） = 100 （分）</span>
+						<h4 class="time">时间 : <span class="badge" style="background: grey; font-size: 15px">15</span> 分钟</h4>
 						<div class="clearfix"></div>
 						<button class="btn btn-info center-block " id="btn2">选择题目考试</button>
 						<div class="clearfix" ></div>
@@ -120,8 +120,8 @@
 				<div class="col-xs-4">
 					<div class="box">
 						<p class="box-title">真分数算式练习</p>
-						<span class="box-date">试题分数: 20 * 5（分） = 20 （分）</span>
-						<h4 class="time">时间 : <span class="badge" style="background: grey; font-size: 15px">60</span> 分钟</h4>
+						<span class="box-date">试题分数: 20 * 5（分） = 10 （分）</span>
+						<h4 class="time">时间 : <span class="badge" style="background: grey; font-size: 15px">15</span> 分钟</h4>
 						<div class="clearfix"></div>
 						<button class="btn btn-info center-block" id="btn3">选择题目考试</button>
 						<div class="clearfix"></div>
@@ -160,7 +160,10 @@ $("#btn1").click(function () {
         shadeClose: true,
         shade: 0.8,
         area: ['60%', '80%'],
-        content: '/expression/1' //iframe的url
+        content: '/expression/1',
+        end: function () {
+            location.reload();
+        } //iframe的url
     });
 
 })
@@ -171,7 +174,10 @@ $("#btn2").click(function () {
         shadeClose: true,
         shade: 0.8,
         area: ['60%', '80%'],
-        content: '/expression/2' //iframe的url
+        content: '/expression/2',
+        end: function () {
+            location.reload();
+        } //iframe的url
     });
 })
 $("#btn3").click(function () {
@@ -181,11 +187,28 @@ $("#btn3").click(function () {
         shadeClose: true,
         shade: 0.8,
         area: ['60%', '80%'],
-        content: '/expression/3' //iframe的url
+        content: '/expression/3',
+        end: function () {
+            location.reload();
+        }//iframe的url
     });
 })
 </script>
 	<script>
+		var data = new Array();
+		var xA = new Array();
+        $.ajax({
+            type: "GET",
+            url: "/chart",
+            dataType: "json",
+            success: function(result){
+                for(i = 0 ;i<result.length;i++ ){
+                    data[i] = parseInt(result[i].score);
+					xA[i] = "第"+(i+1)+"轮";
+                    myChart.setOption(option);
+                }
+            }})
+		console.log(data)
         var myChart = echarts.init(document.getElementById('main'));
         myChart.title = "多轮测试分数柱状图";
         option = {
@@ -208,7 +231,7 @@ $("#btn3").click(function () {
             xAxis : [
                 {
                     type : 'category',
-                    data : ['第一轮', '第二轮', '第三轮', '第四轮', '第五轮'],
+                    data :xA,
                     axisTick: {
                         alignWithLabel: true
                     }
@@ -224,11 +247,10 @@ $("#btn3").click(function () {
                     name:'直接访问',
                     type:'bar',
                     barWidth: '70%',
-                    data:[10, 52, 89, 50, 90]
+                    data:data,
                 }
             ]
         };
-        myChart.setOption(option);
 	</script>
 	</body>
 </html>

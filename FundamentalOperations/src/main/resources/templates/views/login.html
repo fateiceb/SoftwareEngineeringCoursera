@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/favicon.ico">
 
-    <title>Exam - 考试系统</title>
+    <title>Exam - 小学四则运算在线测试</title>
 
     <!-- TODC Bootstrap core CSS -->
     <link rel="stylesheet" href="/assets/yeti/bootstrap.min.css" />
@@ -214,13 +214,13 @@ $(document).ready(function() {
                         }
                     }
                 },
-//                code: {
-//                    validators: {
-//                        notEmpty: {
-//                            message: '请输入验证码'
-//                        }
-//                    }
-//                }
+                code: {
+                    validators: {
+                        notEmpty: {
+                            message: '请输入验证码'
+                        }
+                    }
+                }
             }
         })
         .on('success.form.bv', function(e) {
@@ -229,9 +229,9 @@ $(document).ready(function() {
             ajaxSubmit("/LoginCheck",
 					$("#defaultForm").serialize(),
 					function(data) {
-//						if(data == 0) {
-//							toastr.error('验证码错误!', '登陆');
-//						}
+						if(data == 0) {
+							toastr.error('验证码错误!', '登陆');
+						}
 						if(data == "1") {
 							toastr.error('账号或密码错误!', '登陆');
 						}

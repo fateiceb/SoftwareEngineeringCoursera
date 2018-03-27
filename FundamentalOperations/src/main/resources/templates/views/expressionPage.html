@@ -45,13 +45,14 @@
 <script src="/bootstrap-3.3.7-dist/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/layer/layer.js"></script>
 <script>
-    window.onload =resetTime(600);
+    window.onload =resetTime(900);
+    var timer=null;
     function resetTime(time){
-        var timer=null;
+
         var t=time;
         var m=0;
         var s=0;
-        m=Math.floor(t/60%60);
+        m=Math.floor((t/60)%60);
         m<10&&(m='0'+m);
         s=Math.floor(t%60);
         function countDown(){
@@ -59,24 +60,25 @@
             s<10&&(s='0'+s);
             if(s.length>=3){
                 s=59;
-                m="0"+(Number(m)-1);
+                m=(Number(m)-1);
             }
-            if(m.length>=3){
-                m='00';
-                s='00';
-                clearInterval(timer);
-            }
+//            if(m.length>=3){
+//                m='00';
+//                s='00';
+//                clearInterval(timer);
+//            }
+            if(m==0 && s==0) clearInterval(timer);
             console.log(m+"分钟"+s+"秒");
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
             parent.layer.title("答题区  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
                 "倒计时："+m+"分钟"+s+"秒", index)  //再改变当前层的标题
-            if(m==0&&s==0) submitResult();
+            if(m==0 && s==0) submitResult();
+
         }
         timer=setInterval(countDown,1000);
     }
 
-</script>
-<script>
+
     var submitFlag = 0;
     var next = 0;
     $("#result").hide();
@@ -90,6 +92,7 @@
     }
 
     function submitResult() {
+        clearInterval(timer);
         if( submitFlag == 1){
             layer.tips('你已经提交答案,请开始下一轮答题', '#submit');
             return;
@@ -122,6 +125,14 @@
         for(i = 0 ;i < index.length;i++){
             $("#"+index[i]).css({'background-color':'red','color':'white'})
         }
+        $.ajax({
+            type: "GET",
+            url: "/submit",
+            data: {"score":sum},
+            dataType: "json",
+            success: function(data){
+                console.log(sum);
+                }})
         layer.alert('你答对了'+x+'道题,共'+sum+'分', {
             skin: 'layui-layer-lan'
             ,closeBtn: 0
@@ -130,10 +141,13 @@
     }
 
     function nextSub() {
+        clearInterval(timer);
         parent.location.reload(); // 父页面刷新
         var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
         parent.layer.close(index);
     }
+
+
 </script>
 
 </html>

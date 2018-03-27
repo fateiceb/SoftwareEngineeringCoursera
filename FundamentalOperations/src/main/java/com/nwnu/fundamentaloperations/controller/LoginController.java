@@ -32,9 +32,5 @@ public class LoginController {
         return "/views/_exam/index";
     }
 
-    @RequestMapping(value = "/admin/Userpage")
-    public String adminIndex(){
-        return "/views/_admin/index";
-    }
 
 }
