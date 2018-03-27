@@ -3,7 +3,9 @@ package com.nwnu.fundamentaloperations.domain;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-
+/**
+ * 可视化 的实体类， 该可视化用户保存每个用户每次测试的信息
+ */
 @Entity
 @Table(name = "visualization", schema = "FundamentalOperations", catalog = "")
 public class VisualizationEntity {

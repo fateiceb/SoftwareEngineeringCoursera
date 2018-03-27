@@ -11,7 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-
+/**
+ * 该类 从数据库中 以不同的类别 随机抽取试题
+ */
 @Controller
 @RequestMapping(value = "/expression")
 public class ExpressionController {

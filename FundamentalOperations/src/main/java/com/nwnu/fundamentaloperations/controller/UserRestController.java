@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ *该类 用于页面所有关于用户信息的请求
+ */
 @RestController
 public class UserRestController {
     private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());

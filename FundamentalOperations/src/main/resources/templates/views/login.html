@@ -153,14 +153,14 @@
           <button id="btn-sub" class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
 
           <div class="checkbox">
-            <a class="pull-right">帮助</a>
+           <a class="pull-right"></a>
           </div>
 
         </form>
       </div>
 
       <p >
-        <a class="xxx">Exam</a>
+        <a class="xxx"></a>
       </p>
 
     </div>
@@ -183,7 +183,7 @@
 		} else {
 			url = url + "?timestamp=" + timestamp;
 		}
-		return url;
+		return encodeURI(url);
 	}
 $(document).ready(function() {
     $('#defaultForm')

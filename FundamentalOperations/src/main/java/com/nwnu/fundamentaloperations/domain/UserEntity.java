@@ -4,6 +4,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+/**
+ * 用户的实体类
+ */
 @Entity
 @Table(name = "user", schema = "FundamentalOperations", catalog = "")
 public class UserEntity {

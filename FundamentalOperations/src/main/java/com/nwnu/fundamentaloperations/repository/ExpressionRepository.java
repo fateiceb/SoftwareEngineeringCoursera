@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-
+/**
+ * 运算式的接口
+ */
 public interface ExpressionRepository extends JpaRepository<ExpressionEntity,String>{
         List<ExpressionEntity> findAll();
         List<ExpressionEntity> findAllByType(@Param(value = "type") String type);

@@ -13,9 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 该类用户登陆时，产生并验证 随机验证码
+ */
 @Controller
 public class CodeController {
 	private int width = 90;// 定义图片的width
@@ -27,7 +31,7 @@ public class CodeController {
 	char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
 			'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
-	@RequestMapping("/code")
+	@RequestMapping(value = "/code")
 	public void getCode(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
 		// 定义图像buffer
@@ -90,11 +94,11 @@ public class CodeController {
 		resp.setHeader("Cache-Control", "no-cache");
 		resp.setDateHeader("Expires", 0);
 
-		resp.setContentType("image/jpeg");
+		resp.setContentType("image/png");
 
 		// 将图像输出到Servlet输出流中。
 		ServletOutputStream sos = resp.getOutputStream();
-		ImageIO.write(buffImg, "jpeg", sos);
+		ImageIO.write(buffImg, "png", sos);
 		sos.close();
 	}
 

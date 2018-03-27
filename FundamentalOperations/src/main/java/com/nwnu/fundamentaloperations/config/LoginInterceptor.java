@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
+    //拦截器，先判断是否为合法用户
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         boolean flag;

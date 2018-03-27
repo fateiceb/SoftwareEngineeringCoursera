@@ -30,6 +30,7 @@
 		}
 		#ziti{
 			font-size: 50px;
+			color:#26273a;
 		}
 		.box {
 			width: 100%;
@@ -213,7 +214,7 @@ $("#btn3").click(function () {
         myChart.title = "多轮测试分数柱状图";
         option = {
             title: {
-                text: 'ECharts 入门示例'
+                text: '多轮测试分数柱状图'
             },
             color: ['#3398DB'],
             tooltip : {
@@ -246,8 +247,27 @@ $("#btn3").click(function () {
                 {
                     name:'直接访问',
                     type:'bar',
-                    barWidth: '70%',
+                    barWidth: '60%',
                     data:data,
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                position: 'top',
+                                textStyle: {
+                                    color: '#615a5a'
+                                },
+                                formatter:function(params){
+                                    if(params.value < 0){
+                                        return '';
+                                    }else
+                                    {
+                                        return params.value;
+                                    }
+                                }
+                            }
+                        }
+                    },
                 }
             ]
         };

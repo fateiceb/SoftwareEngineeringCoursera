@@ -27,10 +27,10 @@ public class FundamentaloperationsApplicationTests {
 	@Modifying
 	public void contextLoads() {
 		UserEntity userEntity = new UserEntity();
-		userEntity.setUsername("admin");
+		userEntity.setUsername("admin5");
 		userEntity.setPassword("111");
 		userRepository.save(userEntity);
-		logger.debug(userRepository.findByUsername("admin").toString());
+		//logger.debug(userRepository.findByUsername("admin5").toString());
 	}
 
 	@Test

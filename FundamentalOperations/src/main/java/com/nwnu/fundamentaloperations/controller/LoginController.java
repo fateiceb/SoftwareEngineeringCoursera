@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 该类 控制页面跳转
+ */
 @Controller
 public class LoginController {
     @Autowired
@@ -18,18 +21,17 @@ public class LoginController {
 
     @RequestMapping(value = "/Login")
     public String login(){
-        return "/views/login";
+        return "./views/login";
     }
-
 
     @RequestMapping(value = "/index")
     public String home(){
-        return "/views/index";
+        return "./views/index";
     }
 
     @RequestMapping(value = "/admin/index")
     public String examIndex(){
-        return "/views/_exam/index";
+        return "./views/_exam/index";
     }
 
 

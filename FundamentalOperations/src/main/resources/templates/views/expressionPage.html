@@ -45,10 +45,9 @@
 <script src="/bootstrap-3.3.7-dist/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/layer/layer.js"></script>
 <script>
-    window.onload =resetTime(900);
     var timer=null;
+    window.onload =resetTime(900);
     function resetTime(time){
-
         var t=time;
         var m=0;
         var s=0;
@@ -92,7 +91,7 @@
     }
 
     function submitResult() {
-        clearInterval(timer);
+
         if( submitFlag == 1){
             layer.tips('你已经提交答案,请开始下一轮答题', '#submit');
             return;
@@ -112,7 +111,7 @@
         $(".result").each(function () {
             releResult[i] = $(this).text();
             i++;
-        })
+        });
 
         for(i = 0;i < 20;i++){
             if(userResult[i] == releResult[i]){
@@ -132,12 +131,15 @@
             dataType: "json",
             success: function(data){
                 console.log(sum);
-                }})
+                clearInterval(timer);
+                },
+        });
         layer.alert('你答对了'+x+'道题,共'+sum+'分', {
             skin: 'layui-layer-lan'
             ,closeBtn: 0
             ,anim: 4 //动画类型
         });
+        clearInterval(timer);
     }
 
     function nextSub() {

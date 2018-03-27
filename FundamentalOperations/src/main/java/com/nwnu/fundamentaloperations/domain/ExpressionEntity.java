@@ -4,6 +4,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+/**
+ * 运算式的实体类
+ */
 @Entity
 @Table(name = "expression", schema = "FundamentalOperations", catalog = "")
 public class ExpressionEntity {
